@@ -24,3 +24,45 @@ my_data <- read.csv(
 )
 ```
 
+# Problem 1
+
+## a. Appropriate test
+
+To determine the strength of the relationship between these variables, Pearson's or Spearman's correlations can be used. Pearson's correlations measure that direction of a linear relationship with continuous variables, while a Spearman's correlation measures monotonic relationships between any variables (ordinal or continuous).
+
+## b. Visualization
+
+```{r}
+#| label: correlation-visualization
+
+
+ggplot(data = temp_kelp,
+       mapping = aes(x = temp_c,
+                     y = kelp_elong)) +
+  geom_point(color = "red") +
+  labs(x = "Kelp Elongation Rate (cm/day)",
+       y = "Temperature (\u00B0C)") +
+  theme_minimal()
+```
+
+## c. 
+
+### Check assumptions
+
+### Run test
+
+```{r}
+#| label: QQ-plot
+# base layer: ggplot
+ggplot(data = temp_kelp, # starting data frame
+aes(sample = kelp_elong)) + # y-axis for QQ plot
+# first layer: QQ reference line
+geom_qq_line(color = "red") + # adding a color
+# second layer: QQ plot
+geom_qq()
+```
+
+
+
+
+
