@@ -1,0 +1,26 @@
+---
+title: "homework-03"
+author: "Iris Carnahan"
+date: "2026-05-24"
+format: pdf
+---
+
+# Set-Up Tasks
+
+```{r}
+#| label: reading-in-packages
+
+library(tidyverse) # general use
+library(here) # cleaning data frames
+library(janitor) # file/folder organization
+library(readxl) # reading .xlsx files
+
+temp_kelp <- read.csv(
+  here("data", "temp-kelp.csv")
+)
+
+my_data <- read.csv(
+  here("data", "personal_data_wk8.csv")
+)
+```
+
