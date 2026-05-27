@@ -3,6 +3,8 @@ title: "homework-03"
 author: "Iris Carnahan"
 date: "2026-05-24"
 format: pdf
+message: false # use this to make sure messages don't show up
+warning: false # use this to make sure warnings don't show up
 ---
 
 # Set-Up Tasks
@@ -14,11 +16,12 @@ library(tidyverse) # general use
 library(here) # cleaning data frames
 library(janitor) # file/folder organization
 library(readxl) # reading .xlsx files
-
+library(ggeffects) # calculating the data
+# reading in `temp-kelp` csv file
 temp_kelp <- read.csv(
   here("data", "temp-kelp.csv")
 )
-
+# reading in `personal_data_wk8` csv file
 my_data <- read.csv(
   here("data", "personal_data_wk8.csv")
 )
@@ -28,20 +31,26 @@ my_data <- read.csv(
 
 ## a. Appropriate test
 
-To determine the strength of the relationship between these variables, Pearson's or Spearman's correlations can be used. Pearson's correlations measure that direction of a linear relationship with continuous variables, while a Spearman's correlation measures monotonic relationships between any variables (ordinal or continuous).
+To determine the strength of the relationship between these variables, a Pearson's or Spearman rank correlation can be used. Pearson's correlations measure the direction of a linear relationship with continuous variables, while a Spearman rank correlation measures monotonic relationships between any variables (can be ordinal or continuous).
 
 ## b. Visualization
 
 ```{r}
 #| label: correlation-visualization
 
-
+# base layer: ggplot using `temp_kelp`
 ggplot(data = temp_kelp,
+       # x-axis: temperature in Celsius
+       # y-axis: kelp elongation rate (cm/day)
        mapping = aes(x = temp_c,
                      y = kelp_elong)) +
+  # first layer: geom point to represent individual observations
+  # change color from default to `red`
   geom_point(color = "red") +
+  # relabeling x- and y-axes, adding a title
   labs(x = "Kelp Elongation Rate (cm/day)",
        y = "Temperature (\u00B0C)") +
+  # changing theme
   theme_minimal()
 ```
 
@@ -49,10 +58,8 @@ ggplot(data = temp_kelp,
 
 ### Check assumptions
 
-### Run test
-
 ```{r}
-#| label: QQ-plot
+#| label: QQ-plot-normality
 # base layer: ggplot
 ggplot(data = temp_kelp, # starting data frame
 aes(sample = kelp_elong)) + # y-axis for QQ plot
@@ -62,7 +69,91 @@ geom_qq_line(color = "red") + # adding a color
 geom_qq()
 ```
 
+```{r}
+#| label: linearity-check
+# base layer: ggplot using `temp_kelp`
+ggplot(data = temp_kelp,
+       # x-axis: temperature in Celsius
+       # y-axis: kelp elongation rate (cm/day)
+       mapping = aes(x = temp_c,
+                     y = kelp_elong)) +
+  # first layer: geom point to represent individual observations
+  # change color from default to `red`
+  geom_point(color = "red") +
+  # relabeling x- and y-axes, adding a title
+  labs(x = "Kelp Elongation Rate (cm/day)",
+       y = "Temperature (\u00B0C)") +
+  # changing theme
+  theme_minimal()
+```
+
+```{r}
+#| label: residual-vs-leverage-plot
+# create model called `assump_check`
+# formula: change is kelp elongation rate as a function of temperature
+assump_check <- lm(temp_c ~ kelp_elong, data = temp_kelp)  # data frame: `temp_kelp`
+# displays residual vs. fitted plot only
+plot(assump_check, which = 5)
+```
+
+I checked the assumptions of linearity using a scatter plot, that no major outliers are affecting that line using a residuals vs. leverage plot, and for normality using a Q-Q plot. Given each plot, I would say that this relationship is close enough to be considered normal considering the minor deviations from the theoretical distribution, there is a mostly linear relationship shown by the general downward pattern of the scatterplot and assumed normality, and the residuals are within the Cook's distance lines, so there are no major outliers influencing the model.
+
+### Run test
+
+```{r}
+#| label: model-equation-components
+# display assumption check to generate outputs
+summary(assump_check)
+```
+
+```{r}
+#| label: predicted-values-of-kelp_elong
+
+ggpredict(assump_check,
+          terms = "temp_c [14:22 by 2]") |> 
+  plot(show_data = TRUE)
+
+```
+
+```{r}
+#| label: correlation-strength
+# running test to determine strength of correlation
+cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "pearson")
+
+```
 
 
 
+## d.
 
+## e. 
+
+## f.
+
+# 2. 
+
+## a.
+
+## b.
+
+# 3. 
+
+## a.
+
+## b.
+
+## c.
+
+## d.
+
+## e.
+
+# 4.
+
+## a.
+
+## b.
+
+## c.
+
+## d.
