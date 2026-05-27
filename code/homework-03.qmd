@@ -91,7 +91,7 @@ ggplot(data = temp_kelp,
 #| label: residual-vs-leverage-plot
 # create model called `assump_check`
 # formula: change is kelp elongation rate as a function of temperature
-assump_check <- lm(temp_c ~ kelp_elong, data = temp_kelp)  # data frame: `temp_kelp`
+assump_check <- lm(kelp_elong ~ temp_c, data = temp_kelp)  # data frame: `temp_kelp`
 # displays residual vs. fitted plot only
 plot(assump_check, which = 5)
 ```
@@ -108,23 +108,24 @@ summary(assump_check)
 
 ```{r}
 #| label: predicted-values-of-kelp_elong
-
+# generating the adjusted reductions for response variable
 ggpredict(assump_check,
-          terms = "temp_c [14:22 by 2]") |> 
+          # selecting a range from 14 to 22 in increments of 2
+          terms = "temp_c [14:22 by=2]") |> 
   plot(show_data = TRUE)
-
 ```
 
 ```{r}
 #| label: correlation-strength
 # running test to determine strength of correlation
 cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "pearson")
-
 ```
 
-
-
 ## d.
+
+To evaluate the strength of the relationship between temperature and giant kelp frond elongation rate, I used a Pearson's correlation because the variables were continuous, mostly linear, and normally distributed, enabling me to use this measurement.
+
+We found a strong negative relationship between temperature and giant kelp frond elongation rate (Pearson's r = -0.7, t(30) = -5.2, p < 0.01, $\alpha$ = 0.05). From our model coeffiecient estimates, we found that for each 1 degree Celsius increase in temperature, kelp elongation rate decreases 0.43 \u00B1 0.08 cm/day.
 
 ## e. 
 
