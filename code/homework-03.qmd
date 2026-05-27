@@ -125,9 +125,11 @@ cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "pearson")
 
 To evaluate the strength of the relationship between temperature and giant kelp frond elongation rate, I used a Pearson's correlation because the variables were continuous, mostly linear, and normally distributed, enabling me to use this measurement.
 
-We found a strong negative relationship between temperature and giant kelp frond elongation rate (Pearson's r = -0.7, t(30) = -5.2, p < 0.01, $\alpha$ = 0.05). From our model coeffiecient estimates, we found that for each 1 degree Celsius increase in temperature, kelp elongation rate decreases 0.43 \u00B1 0.08 cm/day.
+We found a strong negative relationship between temperature and giant kelp frond elongation rate (Pearson's r = -0.7, t(30) = -5.2, p < 0.01, $\alpha$ = 0.05), where temperature significantly predicted kep elongation rate. From our model coeffiecient estimates, we found that for each 1 degree Celsius increase in temperature, kelp elongation rate decreases 0.43 ± 0.08 cm/day.
 
 ## e. 
+
+Given the results of the Pearson's correlation test performed, there is generally a negative relationship between temperature and kelp elongation rate. This means that as temperature increases, the elongation and growth rate of these kelp fronds are decreasing 0.43 ± 0.08 cm/day for every degree Celsius increase. If the team desires to maximize kelp frond elongation, maintaining a water temperature around 14°C would maintain a higher elongation rate overall, meaning colder ocean environments are more productive.
 
 ## f.
 
