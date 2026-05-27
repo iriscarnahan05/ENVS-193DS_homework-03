@@ -116,9 +116,9 @@ ggpredict(assump_check,
 ```
 
 ```{r}
-#| label: correlation-strength
+#| label: correlation-strength-p
 # running test to determine strength of correlation
-cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "pearson")
+cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "pearson") # pearson's method
 ```
 
 ## d.
@@ -132,6 +132,14 @@ We found a strong negative relationship between temperature and giant kelp frond
 Given the results of the Pearson's correlation test performed, there is generally a negative relationship between temperature and kelp elongation rate. This means that as temperature increases, the elongation and growth rate of these kelp fronds are decreasing 0.43 ± 0.08 cm/day for every degree Celsius increase. If the team desires to maximize kelp frond elongation, maintaining a water temperature around 14°C would maintain a higher elongation rate overall, meaning colder ocean environments are more productive.
 
 ## f.
+
+```{r}
+#| label: correlation-strength-s
+# running test to determine strength of correlation
+cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "spearman") # spearman method
+```
+
+Using a Pearson's versus a Spearman correlation would have made no difference, as in both tests there is a strong negative relationship temperature and kelp elongation rate and the null hypothesis would be rejected (Spearman $\rho$ = -0.7, S = 9216.1, p < 0.01, $\alpha$ = 0.05). While the outputs mean the same thing, the test components differ since a Pearson's correlation test outputs correlation coefficient (r), a one-sample t-test comparing r to 0, and a 95% confidence interval, while a Spearman correlation test outputs the correlation coefficient ($/rho$), the sum of all squared rank differences (S), and no confidence intervals. Additionally, within the data, there are tied ranks which leads the p-value commuted to be approximate instead of exact for a Spearman correlation.
 
 # 2. 
 
