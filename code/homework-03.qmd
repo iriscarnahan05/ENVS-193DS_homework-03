@@ -1,5 +1,5 @@
 ---
-title: "homework-03"
+title: "Homework 3"
 author: "Iris Carnahan"
 date: "2026-05-24"
 format: pdf
