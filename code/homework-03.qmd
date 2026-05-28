@@ -232,6 +232,8 @@ ggplot(data = class_num,
 
 ## a.
 
+As my data is about time spent biking on campus, I could focus on the stress and anxiety of getting to class on time. The quicker I am biking to my next destination is likely reflected by a faster bike ride, and so the use of darker and more brooding colors could reflect this. Additionally, the mental mania and obsession associated with academics, timeliness, and fitting everything in could be represented with purposefully cluttered and crowded data, and maybe even lines of varying widths with jagged angles. The idea is to create a visual affective piece that evokes a feeling of stress and perpetual belatedness.
+
 ## b.
 
 ## c.
