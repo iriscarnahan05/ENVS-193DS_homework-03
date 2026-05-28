@@ -4,7 +4,13 @@ Spring 2026 Homework Assignment 3
 
 ## General Information
 
+This repo provides an example of both Pearson's and Spearman correlations to determine the strength and direction of the relationship between kelp frond elongation rate and temperature in degrees Celsius.
 
+Using my own data the reflects the minutes per day I spend biking on campus, the number of classes I have per day, and the traffic and weather conditions, this repo outputs both a bar graph and jitter plot.
+
+Lastly, this repo shows the importance of visual clarity and organization in both data tables and plots from the following paper:
+
+McClanahan, T.R., Shafir, S.H. 1990. "Causes and consequences of sea urchin abundance and diversity in Kenyan coral reef lagoons." *Oecologia* 83, 362:370. https://doi.org/10.1007/BF00317561.
 
 ## Data and file information
 ```
