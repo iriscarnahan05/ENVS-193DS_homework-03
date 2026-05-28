@@ -254,12 +254,19 @@ I was originally quite uninspired because biking doesn't seem to have much emoti
 
 ## e.
 
+
 # 4.
 
-## a.
+## a. Revisit and summarize
 
-## b.
+The paper that I selected in homework 1 uses a Mann-Whitney U test as well as Kruskall Wallis test. However, I generally have been focusing on the Mann-Whitney U component of this paper. In this case, a Mann-Whitney U test addresses one of the main questions of the possible effects of predation by finfish on sea urchin community structures, indicated by a protected (isolated from fisherman and with abundant finfish) or unprotected (not isolated from fisherman and with lower finfish abundance) reef, rather than focusing on changes in urchin population density variance due to normalization.
 
-## c.
+![](mann-whitney-u.png)
 
-## d.
+## b. Visual clarity
+
+Viewing the table I inserted above, the authors clearly visually represented their statistics by placing the response variables in the rows (total sea urchin density and survival) and the predictor variable and its orders in the columns (reef protection - protected vs. unprotected), as well as whether the p-value is significant or not. For each of these outcomes, a p-value will indicate whether there is a significant difference between fisherman-protected and unprotected reefs on fish shown in a clear manner. Additionally these outcomes each come with a SE, which is some number above or below the calculation numbers.
+
+## c. Aesthetic clarity
+
+## d. Recommendations
