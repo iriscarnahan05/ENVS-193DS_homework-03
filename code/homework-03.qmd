@@ -269,4 +269,10 @@ Viewing the table I inserted above, the authors clearly visually represented the
 
 ## c. Aesthetic clarity
 
+![](fig2-urchins)
+
+Within this figure, meant to show the differing groups of urchin species depending on how large the area of observation is, there is generally a low data:ink relationship. This is likely due to the overlapping slope lines shown, and even with differing symbols for each reef lagoon, it is still visually busy and a bit confusing. The most confusing aspects of this graph are the outliers which overlap and cross over other lines, furthering confusion of the viewer.
+
 ## d. Recommendations
+
+To make the figure 2 table more clear and visually appealing, there is the potential to split the graph into multiple singe species-area curves to reduce overlap confusion, omit the use of best-fit lines and connect the individual points, or color each line and the corresponding points. Splitting up the graphs into six smaller ones is definitely not the most efficient and would take up more space, but would allow the comparison of individual points to a greater extent. Connecting the points rather than using a line of best fit would change each shape overall, but could drastically increase precision and clarity of data. Lastly, and my preferred solution, would be to pick individual colors for each reef region, not changing the data or methods themselves, but bettering the ability to pick out points to match with said region.
