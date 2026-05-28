@@ -143,7 +143,7 @@ Given the results of the Pearson's correlation test performed, there is generall
 cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "spearman") # spearman method
 ```
 
-Using a Pearson's versus a Spearman correlation would have made no difference, as in both tests there is a strong negative relationship temperature and kelp elongation rate and the null hypothesis would be rejected (Spearman $\rho$ = -0.7, S = 9216.1, p < 0.01, $\alpha$ = 0.05). While the outputs mean the same thing, the test components differ since a Pearson's correlation test outputs correlation coefficient (r), a one-sample t-test comparing r to 0, and a 95% confidence interval, while a Spearman correlation test outputs the correlation coefficient ($/rho$), the sum of all squared rank differences (S), and no confidence intervals. Additionally, within the data, there are tied ranks which leads the p-value commuted to be approximate instead of exact for a Spearman correlation.
+Using a Pearson's versus a Spearman correlation would have made no difference, as in both tests there is a strong negative relationship temperature and kelp elongation rate and the null hypothesis would be rejected (Spearman $\rho$ = -0.7, S = 9216.1, p < 0.01, $\alpha$ = 0.05). While the outputs mean the same thing, the test components differ since a Pearson's correlation test outputs correlation coefficient (r), a one-sample t-test comparing r to 0, and a 95% confidence interval, while a Spearman correlation test outputs the correlation coefficient ($\rho$), the sum of all squared rank differences (S), and no confidence intervals. Additionally, within the data, there are tied ranks which leads the p-value commuted to be approximate instead of exact for a Spearman correlation.
 
 # Problem 2
 
@@ -228,15 +228,19 @@ ggplot(data = class_num,
 
 **Figure 2. The most occurrences of biking happen when there are one or two classes had during the week.** Each colored point represents measurements of time spent biking (min) across a different number of classes (1-4). Colors differentiate the number of classes had during a given day (coral: one class, yellow = two classes, green = three classes, blue = 4 classes).
 
-# 3. 
+# Problem 3 
 
 ## a.
 
-As my data is about time spent biking on campus, I could focus on the stress and anxiety of getting to class on time. The quicker I am biking to my next destination is likely reflected by a faster bike ride, and so the use of darker and more brooding colors could reflect this. Additionally, the mental mania and obsession associated with academics, timeliness, and fitting everything in could be represented with purposefully cluttered and crowded data, and maybe even lines of varying widths with jagged angles. The idea is to create a visual affective piece that evokes a feeling of stress and perpetual belatedness.
+As my data is about time spent biking on campus, I could focus on the stress and anxiety of getting to class on time. The quicker I am biking to my next destination is likely reflected by a faster bike ride, and so the use of darker and more brooding colors could reflect this. Additionally, the mental mania and obsession associated with academics, timeliness, and fitting everything in could be represented with purposefully disorienting, and maybe even lines of varying widths with jagged angles. The idea is to create a visual affective piece that evokes a feeling of stress and perpetual belatedness.
 
 ## b.
 
+![](roughdrafts.png)
+
 ## c.
+
+
 
 ## d.
 
