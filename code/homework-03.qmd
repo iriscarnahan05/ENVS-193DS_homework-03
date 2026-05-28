@@ -23,7 +23,11 @@ temp_kelp <- read.csv(
 )
 # reading in `personal_data_wk8` csv file
 my_data <- read.csv(
-  here("data", "personal_data_wk8.csv")
+  here("data", "my_es_data.csv")
+)
+# reading in `bike_to_class` csv file
+bike_to_class <- read.csv(
+  here("data", "bike_to_class.csv")
 )
 ```
 
@@ -54,7 +58,7 @@ ggplot(data = temp_kelp,
   theme_minimal()
 ```
 
-## c. 
+## c. Assumption checks
 
 ### Check assumptions
 
@@ -121,17 +125,17 @@ ggpredict(assump_check,
 cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "pearson") # pearson's method
 ```
 
-## d.
+## d. Communication results
 
 To evaluate the strength of the relationship between temperature and giant kelp frond elongation rate, I used a Pearson's correlation because the variables were continuous, mostly linear, and normally distributed, enabling me to use this measurement.
 
 We found a strong negative relationship between temperature and giant kelp frond elongation rate (Pearson's r = -0.7, t(30) = -5.2, p < 0.01, $\alpha$ = 0.05), where temperature significantly predicted kep elongation rate. From our model coeffiecient estimates, we found that for each 1 degree Celsius increase in temperature, kelp elongation rate decreases 0.43 ± 0.08 cm/day.
 
-## e. 
+## e. How to apply test results
 
 Given the results of the Pearson's correlation test performed, there is generally a negative relationship between temperature and kelp elongation rate. This means that as temperature increases, the elongation and growth rate of these kelp fronds are decreasing 0.43 ± 0.08 cm/day for every degree Celsius increase. If the team desires to maximize kelp frond elongation, maintaining a water temperature around 14°C would maintain a higher elongation rate overall, meaning colder ocean environments are more productive.
 
-## f.
+## f. Double check
 
 ```{r}
 #| label: correlation-strength-s
@@ -141,11 +145,57 @@ cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "spearman") # spearman
 
 Using a Pearson's versus a Spearman correlation would have made no difference, as in both tests there is a strong negative relationship temperature and kelp elongation rate and the null hypothesis would be rejected (Spearman $\rho$ = -0.7, S = 9216.1, p < 0.01, $\alpha$ = 0.05). While the outputs mean the same thing, the test components differ since a Pearson's correlation test outputs correlation coefficient (r), a one-sample t-test comparing r to 0, and a 95% confidence interval, while a Spearman correlation test outputs the correlation coefficient ($/rho$), the sum of all squared rank differences (S), and no confidence intervals. Additionally, within the data, there are tied ranks which leads the p-value commuted to be approximate instead of exact for a Spearman correlation.
 
-# 2. 
+# Problem 2
 
-## a.
+## a. Updating my data
 
-## b.
+```{r}
+#| label: cleaning-my-data
+# creating new data frame using `my_data`
+my_hist <- my_data |> 
+  # cleaning column names so that only lower case letters and underscores are used
+  clean_names()
+# reordering levels according to the day of the week in chronological order
+my_hist$days <- factor(my_hist$days,
+       levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"))
+
+```
+
+
+```{r}
+#| label: updated-personal-data-visuals
+
+#base layer: ggplot
+ggplot(data = my_hist,
+       # x-axis should be the day of the week and y-axis should be the time spent biking
+       # fill column color to differentiate days
+       mapping = aes(x = days,
+                     y = time_spent_biking_min,
+                     fill = days)) +
+  # first layer: bar chart with height proportional to the values of the data
+  geom_col(width = 0.5,
+           # color border line of bar black
+           color = "black",
+           # fill bin color pink
+           fill = "pink") +
+  # relabeling x- and y-axes, adding title
+  labs(title = "Comparison of Total Time Spent Biking Throughout the Week",
+       x = "Day of the Week",
+       y = "Time Biking on Campus (min)") +
+  # changing theme of histogram
+  theme_minimal() +
+  # removing legend
+  theme(legend.position = "none")
+```
+
+```{r}
+#| label: biking-classes-jitter
+
+```
+
+
+
+## b. Creating captions
 
 # 3. 
 
