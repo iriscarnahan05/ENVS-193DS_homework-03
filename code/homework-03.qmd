@@ -91,33 +91,9 @@ ggplot(data = temp_kelp,
   theme_minimal()
 ```
 
-```{r}
-#| label: residual-vs-leverage-plot
-# creating model called `assump_check`
-# formula: change is kelp elongation rate as a function of temperature
-assump_check <- lm(kelp_elong ~ temp_c, data = temp_kelp)  # data frame: `temp_kelp`
-# displaying residual vs. fitted plot only
-plot(assump_check, which = 5)
-```
-
-I checked the assumptions of linearity using a scatter plot, that no major outliers are affecting that line using a residuals vs. leverage plot, and for normality using a Q-Q plot. Given each plot, I would say that this relationship is close enough to be considered normal considering the minor deviations from the theoretical distribution, there is a mostly linear relationship shown by the general downward pattern of the scatterplot and assumed normality, and the residuals are within the Cook's distance lines, so there are no major outliers influencing the model.
+I checked the assumptions of linearity using a scatter plot and for normality using a Q-Q plot. Given both plots, I would say that this relationship is close enough to be considered normal, considering the minor deviations from the theoretical distribution, there is a mostly linear relationship shown by the general downward pattern of the scatterplot and assumed normality.
 
 ### Run test
-
-```{r}
-#| label: model-equation-components
-# displaying assumption check to generate outputs
-summary(assump_check)
-```
-
-```{r}
-#| label: predicted-values-of-kelp_elong
-# generating the adjusted reductions for response variable
-ggpredict(assump_check,
-          # selecting a range from 14 to 22 in increments of 2
-          terms = "temp_c [14:22 by=2]") |> 
-  plot(show_data = TRUE)
-```
 
 ```{r}
 #| label: correlation-strength-p
@@ -129,11 +105,11 @@ cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "pearson") # pearson's
 
 To evaluate the strength of the relationship between temperature and giant kelp frond elongation rate, I used a Pearson's correlation because the variables were continuous, mostly linear, and normally distributed, enabling me to use this measurement.
 
-We found a strong negative relationship between temperature and giant kelp frond elongation rate (Pearson's r = -0.7, t(30) = -5.2, p < 0.01, $\alpha$ = 0.05), where temperature significantly predicted kep elongation rate. From our model coeffiecient estimates, we found that for each 1 degree Celsius increase in temperature, kelp elongation rate decreases 0.43 ± 0.08 cm/day.
+We found a moderate negative relationship between temperature and giant kelp frond elongation rate (Pearson's r = -0.68, t(30) = -5.2, p < 0.01, $\alpha$ = 0.05), where temperature significantly predicted the decrease of kelp elongation rate. 
 
 ## e. How to apply test results
 
-Given the results of the Pearson's correlation test performed, there is generally a negative relationship between temperature and kelp elongation rate. This means that as temperature increases, the elongation and growth rate of these kelp fronds are decreasing 0.43 ± 0.08 cm/day for every degree Celsius increase. If the team desires to maximize kelp frond elongation, maintaining a water temperature around 14°C would maintain a higher elongation rate overall, meaning colder ocean environments are more productive.
+Given the results of the Pearson's correlation test performed, there is generally a negative relationship between temperature and kelp elongation rate. If the team desires to maximize kelp frond elongation, maintaining a water temperature around 14°C would maintain a higher elongation rate overall, meaning colder ocean environments are more productive. In order to globally conserve kelp species and promote ideal growth conditions, narrowing the team's focus to minimizing climate effects that exacerbate climate temperature increases would aid species propagation for generations to come.
 
 ## f. Double check
 
@@ -143,7 +119,7 @@ Given the results of the Pearson's correlation test performed, there is generall
 cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "spearman") # spearman method
 ```
 
-Using a Pearson's versus a Spearman correlation would have made no difference, as in both tests there is a strong negative relationship temperature and kelp elongation rate and the null hypothesis would be rejected (Spearman $\rho$ = -0.7, S = 9216.1, p < 0.01, $\alpha$ = 0.05). While the outputs mean the same thing, the test components differ since a Pearson's correlation test outputs correlation coefficient (r), a one-sample t-test comparing r to 0, and a 95% confidence interval, while a Spearman correlation test outputs the correlation coefficient ($\rho$), the sum of all squared rank differences (S), and no confidence intervals. Additionally, within the data, there are tied ranks which leads the p-value commuted to be approximate instead of exact for a Spearman correlation.
+Using a Pearson's versus a Spearman correlation would have made no difference, as in both tests there is a moderate negative relationship temperature and kelp elongation rate and the null hypothesis would be rejected (Spearman $\rho$ = -0.68, S = 9216.1, p < 0.01, $\alpha$ = 0.05). While the outputs mean the same thing, the test components differ since a Pearson's correlation test outputs correlation coefficient (r), a one-sample t-test comparing r to 0, and a 95% confidence interval, while a Spearman correlation test outputs the correlation coefficient ($\rho$), the sum of all squared rank differences (S), and no confidence intervals. Additionally, within the data, there are tied ranks which leads the p-value commuted to be approximate instead of exact for a Spearman correlation.
 
 # Problem 2
 
@@ -187,7 +163,7 @@ ggplot(data = my_hist,
        x = "Day of the Week",
        y = "Time Biking on Campus (min)") +
   # changing theme of histogram
-  theme(panel.background = element_blank()) +
+  theme(panel.background = element_blank()) + 
   # removing legend
   theme(legend.position = "none")
 ```
@@ -199,25 +175,34 @@ ggplot(data = class_num,
        # x-axis: number of classes per day
        # y-axis: time spent biking (min)
        # coloring by number of classes per day
-       mapping = aes(x = number_of_classes_per_day,
+       mapping = aes(x = factor(number_of_classes_per_day),
                      y = time_spent_biking_min,
-                     color = number_of_classes_per_day)) +
+                     color = factor(number_of_classes_per_day))) +
   # first layer: jitter plot
   # coloring data points by number of classes in custom coloration
   geom_jitter(height = 0,
               width = 0.1,
+              size = 2,
               aes(color = factor(number_of_classes_per_day))) +
   scale_color_manual(values = c("1" = "coral",
                                 "2" = "gold",
                                 "3" = "seagreen2",
                                 "4" = "royalblue3")) +
+  # displaying medians for each level along the x-axis
+  # changing color and size
+  stat_summary(
+    fun = median,
+    geom = "point",
+    size = 2,
+    color = "black"
+  ) +
   # relabeling x- and y-axes, adding a title and subtitle
   labs(title = "Most biking occurs with one or two classes per day",
        subtitle = "May 22, 2026",
        x = "Number of Classes a Day (#/day)",
        y = "Time Spent Biking (min)") +
-  # changing theme to remove gridlines and any other visual clutter
-  theme(panel.background = element_blank()) +
+  # changing theme to remove any visual clutter
+  theme_minimal() +
   # removing legend
   theme(legend.position = "none")
 ```
@@ -226,7 +211,7 @@ ggplot(data = class_num,
 
 **Figure 1. The amount of time biking (min) differs across days of the week.** The pink bins of the bar graph represent the cumulative number of minutes spent biking on campus during that day of the week over four weeks. 
 
-**Figure 2. The most occurrences of biking happen when there are one or two classes had during the week.** Each colored point represents measurements of time spent biking (min) across a different number of classes (1-4). Colors differentiate the number of classes had during a given day (coral: one class, yellow = two classes, green = three classes, blue = 4 classes).
+**Figure 2. I spend the most time biking (min) on average when there are three classes in a day.** Each colored point, aside from black, represents measurements of time spent biking (min) across a different number of classes (1-4). Colors differentiate the number of classes had during a given day (coral: one class, yellow = two classes, green = three classes, blue = 4 classes). Black points represent the median amount of time biking on campus given a certain number of classes.
 
 # Problem 3 
 
