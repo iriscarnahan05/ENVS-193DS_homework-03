@@ -49,7 +49,7 @@ ggplot(data = temp_kelp,
        mapping = aes(x = temp_c,
                      y = kelp_elong)) +
   # first layer: geom point to represent individual observations
-  # change color from default to `red`
+  # changing color from default to `red`
   geom_point(color = "red") +
   # relabeling x- and y-axes, adding a title
   labs(x = "Kelp Elongation Rate (cm/day)",
@@ -82,7 +82,7 @@ ggplot(data = temp_kelp,
        mapping = aes(x = temp_c,
                      y = kelp_elong)) +
   # first layer: geom point to represent individual observations
-  # change color from default to `red`
+  # changing color from default to `red`
   geom_point(color = "red") +
   # relabeling x- and y-axes, adding a title
   labs(x = "Kelp Elongation Rate (cm/day)",
@@ -93,10 +93,10 @@ ggplot(data = temp_kelp,
 
 ```{r}
 #| label: residual-vs-leverage-plot
-# create model called `assump_check`
+# creating model called `assump_check`
 # formula: change is kelp elongation rate as a function of temperature
 assump_check <- lm(kelp_elong ~ temp_c, data = temp_kelp)  # data frame: `temp_kelp`
-# displays residual vs. fitted plot only
+# displaying residual vs. fitted plot only
 plot(assump_check, which = 5)
 ```
 
@@ -106,7 +106,7 @@ I checked the assumptions of linearity using a scatter plot, that no major outli
 
 ```{r}
 #| label: model-equation-components
-# display assumption check to generate outputs
+# displaying assumption check to generate outputs
 summary(assump_check)
 ```
 
@@ -159,8 +159,11 @@ my_hist <- my_data |>
 my_hist$days <- factor(my_hist$days,
        levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"))
 
+# creating new data frame using `class_num`
+class_num <- bike_to_class |> 
+  # cleaning column names so that only lower case letters and underscores are used
+  clean_names()
 ```
-
 
 ```{r}
 #| label: updated-personal-data-visuals
@@ -168,7 +171,7 @@ my_hist$days <- factor(my_hist$days,
 #base layer: ggplot
 ggplot(data = my_hist,
        # x-axis should be the day of the week and y-axis should be the time spent biking
-       # fill column color to differentiate days
+       # filling column color to differentiate days
        mapping = aes(x = days,
                      y = time_spent_biking_min,
                      fill = days)) +
@@ -178,24 +181,52 @@ ggplot(data = my_hist,
            color = "black",
            # fill bin color pink
            fill = "pink") +
-  # relabeling x- and y-axes, adding title
-  labs(title = "Comparison of Total Time Spent Biking Throughout the Week",
+  # relabeling x- and y-axes, adding title and subtitle
+  labs(title = "Comparison of total time spent biking throughout the week",
+       subtitle = "May 22, 2026",
        x = "Day of the Week",
        y = "Time Biking on Campus (min)") +
   # changing theme of histogram
-  theme_minimal() +
+  theme(panel.background = element_blank()) +
   # removing legend
   theme(legend.position = "none")
 ```
 
 ```{r}
 #| label: biking-classes-jitter
-
+# base layer: ggplot
+ggplot(data = class_num,
+       # x-axis: number of classes per day
+       # y-axis: time spent biking (min)
+       # coloring by number of classes per day
+       mapping = aes(x = number_of_classes_per_day,
+                     y = time_spent_biking_min,
+                     color = number_of_classes_per_day)) +
+  # first layer: jitter plot
+  # coloring data points by number of classes in custom coloration
+  geom_jitter(height = 0,
+              width = 0.1,
+              aes(color = factor(number_of_classes_per_day))) +
+  scale_color_manual(values = c("1" = "coral",
+                                "2" = "gold",
+                                "3" = "seagreen2",
+                                "4" = "royalblue3")) +
+  # relabeling x- and y-axes, adding a title and subtitle
+  labs(title = "Most biking occurs with one or two classes per day",
+       subtitle = "May 22, 2026",
+       x = "Number of Classes a Day (#/day)",
+       y = "Time Spent Biking (min)") +
+  # changing theme to remove gridlines and any other visual clutter
+  theme(panel.background = element_blank()) +
+  # removing legend
+  theme(legend.position = "none")
 ```
 
-
-
 ## b. Creating captions
+
+**Figure 1. The amount of time biking (min) differs across days of the week.** The pink bins of the bar graph represent the cumulative number of minutes spent biking on campus during that day of the week over four weeks. 
+
+**Figure 2. The most occurrences of biking happen when there are one or two classes had during the week.** Each colored point represents measurements of time spent biking (min) across a different number of classes (1-4). Colors differentiate the number of classes had during a given day (coral: one class, yellow = two classes, green = three classes, blue = 4 classes).
 
 # 3. 
 
