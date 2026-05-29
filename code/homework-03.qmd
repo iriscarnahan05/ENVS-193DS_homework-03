@@ -3,6 +3,7 @@ title: "Homework 3"
 author: "Iris Carnahan"
 date: "2026-05-24"
 format: pdf
+toc: true # use this to display a table of contents
 message: false # use this to make sure messages don't show up
 warning: false # use this to make sure warnings don't show up
 ---
@@ -197,7 +198,7 @@ ggplot(data = class_num,
     color = "black"
   ) +
   # relabeling x- and y-axes, adding a title and subtitle
-  labs(title = "Most biking occurs with one or two classes per day",
+  labs(title = "Most biking occurs on average when there are three classes per day",
        subtitle = "May 22, 2026",
        x = "Number of Classes a Day (#/day)",
        y = "Time Spent Biking (min)") +
