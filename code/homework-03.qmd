@@ -64,7 +64,7 @@ ggplot(data = temp_kelp,
 ### Check assumptions
 
 ```{r}
-#| label: QQ-plot-normality
+#| label: QQ-plot-normality-kelp
 # base layer: ggplot
 ggplot(data = temp_kelp, # starting data frame
 aes(sample = kelp_elong)) + # y-axis for QQ plot
@@ -72,6 +72,17 @@ aes(sample = kelp_elong)) + # y-axis for QQ plot
 geom_qq_line(color = "red") + # adding a color
 # second layer: QQ plot
 geom_qq()
+```
+
+```{r}
+#| label: QQ-plot-normality-temp
+# base layer: ggplot
+ggplot(data = temp_kelp, # starting data frame
+       aes(sample = temp_c)) + # y-axis for QQ plot
+  # first layer: QQ reference line
+  geom_qq_line(color = "cyan") +
+  # second layer: QQ plot
+  geom_qq()
 ```
 
 ```{r}
@@ -84,7 +95,7 @@ ggplot(data = temp_kelp,
                      y = kelp_elong)) +
   # first layer: geom point to represent individual observations
   # changing color from default to `red`
-  geom_point(color = "red") +
+  geom_point(color = "purple") +
   # relabeling x- and y-axes, adding a title
   labs(x = "Kelp Elongation Rate (cm/day)",
        y = "Temperature (\u00B0C)") +
@@ -92,7 +103,7 @@ ggplot(data = temp_kelp,
   theme_minimal()
 ```
 
-I checked the assumptions of linearity using a scatter plot and for normality using a Q-Q plot. Given both plots, I would say that this relationship is close enough to be considered normal, considering the minor deviations from the theoretical distribution, there is a mostly linear relationship shown by the general downward pattern of the scatterplot and assumed normality.
+I checked the assumptions of linearity using a scatter plot and for normality using two Q-Q plots, one for each variable. Given the two Q-Q plots, I would say that both relationships are close enough to be considered normal, as there are only minor deviations from the theoretical distributions, and they exist at the beginning or end of the theoretical line which is not uncommon. There is also a mostly linear relationship shown by the general downward pattern of the scatterplot.
 
 ### Run test
 
@@ -120,7 +131,7 @@ Given the results of the Pearson's correlation test performed, there is generall
 cor.test(temp_kelp$temp_c, temp_kelp$kelp_elong, method = "spearman") # spearman method
 ```
 
-Using a Pearson's versus a Spearman correlation would have made no difference, as in both tests there is a moderate negative relationship temperature and kelp elongation rate and the null hypothesis would be rejected (Spearman $\rho$ = -0.68, S = 9216.1, p < 0.01, $\alpha$ = 0.05). While the outputs mean the same thing, the test components differ since a Pearson's correlation test outputs correlation coefficient (r), a one-sample t-test comparing r to 0, and a 95% confidence interval, while a Spearman correlation test outputs the correlation coefficient ($\rho$), the sum of all squared rank differences (S), and no confidence intervals. Additionally, within the data, there are tied ranks which leads the p-value commuted to be approximate instead of exact for a Spearman correlation.
+Using a Pearson's versus a Spearman rank correlation would have made no difference, as in both tests there is a moderate negative relationship temperature and kelp elongation rate and the null hypothesis would be rejected (Pearson's r = -0.68, t(30) = -5.2, p < 0.01, $\alpha$ = 0.05)(Spearman $\rho$ = -0.68, S = 9216.1, p < 0.01, $\alpha$ = 0.05). While the outputs generally mean the same thing, the test components differ since a Pearson's correlation test outputs correlation coefficient (r), a one-sample t-test comparing r to 0, and a 95% confidence interval, while a Spearman correlation test outputs the correlation coefficient ($\rho$), the sum of all squared rank differences (S), and no confidence intervals. Additionally, within the data, there are tied ranks which leads the p-value commuted to be approximate instead of exact for a Spearman correlation.
 
 # Problem 2
 
@@ -159,7 +170,7 @@ ggplot(data = my_hist,
            # fill bin color pink
            fill = "pink") +
   # relabeling x- and y-axes, adding title and subtitle
-  labs(title = "Comparison of total time spent biking throughout the week",
+  labs(title = "Comparison of total time spent biking throughout the \nweek",
        subtitle = "May 22, 2026",
        x = "Day of the Week",
        y = "Time Biking on Campus (min)") +
